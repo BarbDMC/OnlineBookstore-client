@@ -1,7 +1,7 @@
 
 import Home  from "./pages/Home/Home";
 import Login from "./pages/Login/Login";
-// import {Store} from "../Store/Store";
+import Store from "./pages/Store/Store";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 
@@ -11,7 +11,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
-        {/* <Route path="/notes" element={<Store />} /> */}
+        <Route path="/store" element={<Store />} />
       </Routes>
     </BrowserRouter>
   );
