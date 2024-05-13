@@ -1,8 +1,7 @@
 
 import Home  from "./pages/Home/Home";
-// import { Login } from "../Login/Login";
-// import {Notes} from "../Notes/Notes";
-// import { NotFound } from "../404/NotFound";
+import Login from "./pages/Login/Login";
+// import {Store} from "../Store/Store";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 
@@ -11,9 +10,8 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
-        {/* <Route path="/login" element={<Login />} /> */}
-        {/* <Route path="/notes" element={<Notes />} /> */}
-        {/* <Route path="*" element={<NotFound />} /> */}
+        <Route path="/login" element={<Login />} />
+        {/* <Route path="/notes" element={<Store />} /> */}
       </Routes>
     </BrowserRouter>
   );
