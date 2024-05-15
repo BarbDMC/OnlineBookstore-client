@@ -1,22 +1,15 @@
 import { useState } from "react";
-import { Book } from "../../interfaces/bookInterface";
 import CustomButton from "../CustomButton/CustomButton";
-import useSearchByTitle from "../../hooks/useSearchByTitle";
-import useSearchByAuthor from "../../hooks/useSearchByAuthor";
+import { useDispatch } from 'react-redux';
+import { AppDispatch } from '../../store';
+import { searchBooks } from '../../features/books/booksSlice';
 
-interface SearchInputProps {
-  handleSearchResults: (authorBooks: Book[], titleBooks: Book[]) => void;
-}
-
-const SearchInput = ({ handleSearchResults }: SearchInputProps) => {
+const SearchInput = () => {
   const [searchTerm, setSearchTerm] = useState('');
-  const { searchByTitle } = useSearchByTitle();
-  const { searchByAuthor } = useSearchByAuthor();
+  const dispatch = useDispatch<AppDispatch>();
 
   const handleSearch = async () => {
-    const authorBooks =  await searchByAuthor(searchTerm);
-    const titleBooks = await searchByTitle(searchTerm);
-    handleSearchResults(authorBooks, titleBooks);
+    await dispatch(searchBooks(searchTerm));
   };
 
   return (
