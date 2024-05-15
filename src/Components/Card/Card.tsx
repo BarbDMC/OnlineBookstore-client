@@ -2,9 +2,10 @@ import { Book } from "../../interfaces/bookInterface";
 
 type CardProps = {
   book: Book;
+  userRole: number;
 };
 
-const Card = ({ book } : CardProps) => {
+const Card = ({ book, userRole } : CardProps) => {
   return (
     <div key={book.id} className="bg-transparent border-2 border-[#E6DBCD] shadow-md rounded-lg p-4 flex flex-col justify-between">
       <div>
@@ -21,7 +22,19 @@ const Card = ({ book } : CardProps) => {
           <p className="text-gray-500">${book.price}</p>
         </div>
       </div>
-      <button className="bg-red-400 text-white font-semibold px-4 py-2 rounded-lg self-end">Add to Cart</button>
+      {
+        userRole === 1 && 
+        <button className="bg-red-400 text-white font-semibold px-4 py-2 rounded-lg self-end">
+          Add to Cart
+        </button>
+      }
+      {
+        userRole == 0 && 
+        <div className="flex justify-end">
+          <button className="bg-lime-600 text-white font-semibold mx-4 px-4 py-2 rounded-lg">Edit</button>
+          <button className="bg-red-400 text-white font-semibold px-4 py-2 rounded-lg">Delete</button>
+        </div>
+      }
     </div>
   );
 };
