@@ -6,6 +6,7 @@ import { RootState, AppDispatch } from '../../store';
 import { Book } from '../../interfaces/bookInterface';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchAllBooks } from '../../features/books/booksSlice';
+import CustomButton from '../../Components/CustomButton/CustomButton';
 
 
 const Store = () => {
@@ -23,6 +24,10 @@ const Store = () => {
   return (
     <div className="bg-stone-50">
       <Navbar />
+      <div className="p-6 flex justify-between">
+        <h1 className="text-4xl text-stone-500 font-semibold">Popular</h1>
+        <CustomButton text='Add book +' styles="bg-[#E2D6C9] text-stone-500 text-xs font-medium" onClickAction={() => 'HI'} />
+      </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-4">
         {status === 'loading' && <div className=''>Loading...</div>}
         {status === 'failed' && <div>Error: {error || 'Unknown error'}</div>}
