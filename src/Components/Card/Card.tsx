@@ -6,7 +6,7 @@ type CardProps = {
 
 const Card = ({ book } : CardProps) => {
   return (
-    <div key={book.id} className="bg-transparent border border-2 border-[#E6DBCD] shadow-md rounded-lg p-4 flex flex-col justify-between">
+    <div key={book.id} className="bg-transparent border-2 border-[#E6DBCD] shadow-md rounded-lg p-4 flex flex-col justify-between">
       <div>
         <div className="flex justify-center">
           <img
