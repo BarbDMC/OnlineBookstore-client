@@ -27,7 +27,7 @@ const FormField: React.FC<FormFieldProps> = ({ label, name, type, value, onChang
           name={name}
           value={value}
           onChange={onChange}
-          className={`block py-2 px-4 bg-stone-50 rounded-lg border border-stone-500 text-stone-500 opacity-50 text-lg font-bold font-['Poppins'] ${className}`}
+          className={`w-full block py-2 px-4 bg-stone-50 rounded-lg border border-stone-500 text-stone-500 opacity-50 text-lg font-bold font-['Poppins'] ${className}`}
         />
       )}
     </div>

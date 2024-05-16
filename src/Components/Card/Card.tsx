@@ -9,7 +9,6 @@ type CardProps = {
 };
 
 const Card = ({ book, userRole } : CardProps) => {
-  console.log("🚀 ~ Card ~ book:", book)
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleEdit = () => {

@@ -77,6 +77,15 @@ const BookModal = ({ book, isOpen, onClose, onSave }: BookModalProps) => {
                 onChange={handleChange}
               />
           </div>
+          <div className="mb-4 w-full">
+            <FormField
+                label="Image URL"
+                name="image"
+                type="text"
+                value={formData.image}
+                onChange={handleChange}
+              />
+          </div>
           <div className="mb-4">
             <FormField
                 label="Description"
