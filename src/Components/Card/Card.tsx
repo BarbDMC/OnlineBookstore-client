@@ -1,3 +1,6 @@
+import { useState } from "react";
+import BookModal from "../BookModal/BookModal";
+import { updateBook, deleteBook } from "../../services/booksServices";
 import { Book } from "../../interfaces/bookInterface";
 
 type CardProps = {
@@ -6,6 +9,29 @@ type CardProps = {
 };
 
 const Card = ({ book, userRole } : CardProps) => {
+  console.log("🚀 ~ Card ~ book:", book)
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleEdit = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleSave = async (updatedBook: Book) => {
+    try {
+      await updateBook(updatedBook);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const handleDelete = async (id: number) => {
+    try {
+      await deleteBook(id);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   return (
     <div key={book.id} className="bg-transparent border-2 border-[#E6DBCD] shadow-md rounded-lg p-4 flex flex-col justify-between">
       <div>
@@ -31,8 +57,9 @@ const Card = ({ book, userRole } : CardProps) => {
       {
         userRole == 0 && 
         <div className="flex justify-end">
-          <button className="bg-lime-600 text-white font-semibold mx-4 px-4 py-2 rounded-lg">Edit</button>
-          <button className="bg-red-400 text-white font-semibold px-4 py-2 rounded-lg">Delete</button>
+          <button className="bg-lime-600 text-white font-semibold mx-4 px-4 py-2 rounded-lg" onClick={handleEdit}>Edit</button>
+          <button className="bg-red-400 text-white font-semibold px-4 py-2 rounded-lg" onClick={() => handleDelete(book.id as number)}>Delete</button>
+          <BookModal book={book} isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} onSave={handleSave} />
         </div>
       }
     </div>
