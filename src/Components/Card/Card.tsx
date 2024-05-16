@@ -2,7 +2,7 @@ import { Book } from "../../interfaces/bookInterface";
 
 type CardProps = {
   book: Book;
-  userRole: number;
+  userRole: number | undefined;
 };
 
 const Card = ({ book, userRole } : CardProps) => {

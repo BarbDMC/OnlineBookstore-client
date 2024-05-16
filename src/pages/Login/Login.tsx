@@ -1,11 +1,14 @@
-
 import './Login.css';
-import React, { useState } from "react";
+import { useState } from "react";
+import { useDispatch } from 'react-redux';
+import { AppDispatch } from '../../store';
 import { useNavigate } from 'react-router-dom';
 import { useLogin } from "../../hooks/useLogin";
+import { login as loginAction } from '../../features/user/userSlice';
 
 const Login = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch<AppDispatch>();
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const { login, error, isLoading } = useLogin();
@@ -24,7 +27,8 @@ const Login = () => {
     const loggedUser = await login(email, password);
 
     if (loggedUser) {
-      navigate('/store', { state: loggedUser });
+      dispatch(loginAction(loggedUser));
+      navigate('/store');
     }
   };
 
