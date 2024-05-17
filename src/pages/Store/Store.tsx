@@ -53,7 +53,7 @@ const Store = () => {
         {status === 'failed' && <div>Error: {error || 'Unknown error'}</div>}
 
         {books.map((book: Book) => (
-          <Card key={book.id} book={book} userRole={user?.role} />
+          <Card book={book} userRole={user?.role} />
         ))}
 
         {!books.length && status === 'succeeded' && <div className='text-black'>No books found</div>}

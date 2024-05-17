@@ -1,9 +1,11 @@
 import { useState } from "react";
 import BookModal from "../BookModal/BookModal";
-import { useDispatch } from 'react-redux';
+import { RootState } from '../../store';
+import { useDispatch, useSelector } from 'react-redux';
 import { addToCart } from '../../features/cart/cartSlice';
 import { updateBook, deleteBook } from "../../services/booksServices";
 import { Book } from "../../interfaces/bookInterface";
+import { setBooks } from "../../features/books/booksSlice";
 
 type CardProps = {
   book: Book;
@@ -13,6 +15,7 @@ type CardProps = {
 const Card = ({ book, userRole } : CardProps) => {
   const dispatch = useDispatch();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const books = useSelector((state: RootState) => state.books.books);
 
   const handleEdit = () => {
     setIsModalOpen(true);
@@ -33,7 +36,9 @@ const Card = ({ book, userRole } : CardProps) => {
 
   const handleSave = async (updatedBook: Book) => {
     try {
-      await updateBook(updatedBook);
+      const response = await updateBook(updatedBook);
+      const updatedBooks = books.map((book) => book.id === response.book.id ? response.book : book);
+      dispatch(setBooks(updatedBooks));
     } catch (err) {
       console.error(err);
     }
@@ -42,6 +47,8 @@ const Card = ({ book, userRole } : CardProps) => {
   const handleDelete = async (id: number) => {
     try {
       await deleteBook(id);
+      const updatedBooks = books.filter((book) => book.id !== id);
+      dispatch(setBooks(updatedBooks));
     } catch (err) {
       console.error(err);
     }
