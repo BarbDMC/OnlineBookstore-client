@@ -1,5 +1,7 @@
 import { useState } from "react";
 import BookModal from "../BookModal/BookModal";
+import { useDispatch } from 'react-redux';
+import { addToCart } from '../../features/cart/cartSlice';
 import { updateBook, deleteBook } from "../../services/booksServices";
 import { Book } from "../../interfaces/bookInterface";
 
@@ -9,10 +11,24 @@ type CardProps = {
 };
 
 const Card = ({ book, userRole } : CardProps) => {
+  const dispatch = useDispatch();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleEdit = () => {
     setIsModalOpen(true);
+  };
+
+  const handleAddToCart = (book: Book) => {
+    if (book.id !== undefined) {
+      const cartItem = {
+        id: book.id,
+        name: book.title,
+        price: book.price,
+        quantity: 1,
+      };
+
+      dispatch(addToCart(cartItem));
+    }
   };
 
   const handleSave = async (updatedBook: Book) => {
@@ -49,7 +65,7 @@ const Card = ({ book, userRole } : CardProps) => {
       </div>
       {
         userRole === 1 && 
-        <button className="bg-red-400 text-white font-semibold px-4 py-2 rounded-lg self-end">
+        <button className="bg-red-400 text-white font-semibold px-4 py-2 rounded-lg self-end" onClick={() => handleAddToCart(book)}>
           Add to Cart
         </button>
       }
