@@ -1,6 +1,7 @@
 
 import { RootState } from '../../store';
 import CartItem from '../CartItem/CartItem';
+import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { removeFromCart, updateQuantity, clearCart } from '../../features/cart/cartSlice';
 
@@ -9,6 +10,7 @@ interface CartProps {
 }
 
 const Cart = ({ onClose }: CartProps) => {
+  const navigate = useNavigate();
   const cart = useSelector((state: RootState) => state.cart.items);
   const total = useSelector((state: RootState) => state.cart.total);
   const dispatch = useDispatch();
@@ -23,6 +25,10 @@ const Cart = ({ onClose }: CartProps) => {
 
   const handleClearCart = () => {
     dispatch(clearCart());
+  };
+  
+  const handleGoToPay = () => {
+    navigate('/checkout');
   };
 
   return (
@@ -51,7 +57,7 @@ const Cart = ({ onClose }: CartProps) => {
         </div>
 
         <div className="p-4">
-          <button className="w-full bg-red-400 text-white font-semibold px-4 py-2 rounded-lg">
+          <button className="w-full bg-red-400 text-white font-semibold px-4 py-2 rounded-lg" onClick={handleGoToPay}>
             Go to pay
           </button>
           <button
