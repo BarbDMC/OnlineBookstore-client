@@ -1,16 +1,24 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import CustomButton from "../CustomButton/CustomButton";
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../store';
-import { searchBooks } from '../../features/books/booksSlice';
+import { fetchAllBooks, searchBooks } from '../../features/books/booksSlice';
 
 const SearchInput = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const dispatch = useDispatch<AppDispatch>();
 
   const handleSearch = async () => {
-    await dispatch(searchBooks(searchTerm));
+    if (searchTerm.trim() !== '') {
+      await dispatch(searchBooks(searchTerm));
+    }
   };
+
+  useEffect(() => {
+    if (searchTerm.trim() === '') {
+      dispatch(fetchAllBooks());
+    }
+  }, [dispatch, searchTerm]);
 
   return (
     <div className="flex grow justify-center items-center">
