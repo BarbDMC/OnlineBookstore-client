@@ -7,7 +7,7 @@ import { Book } from '../../interfaces/bookInterface';
 import { addBook } from '../../services/booksServices';
 import { useDispatch, useSelector } from 'react-redux';
 import BookModal from '../../Components/BookModal/BookModal';
-import { fetchAllBooks } from '../../features/books/booksSlice';
+import { setBooks, fetchAllBooks } from '../../features/books/booksSlice';
 import CustomButton from '../../Components/CustomButton/CustomButton';
 
 
@@ -31,6 +31,9 @@ const Store = () => {
   const handleSave = async (newBook: Book) => {
     try {
       await addBook(newBook);
+      const storeBooks = JSON.parse(JSON.stringify(books));
+      storeBooks.push(newBook);
+      dispatch(setBooks(storeBooks));
     } catch (err) {
       console.error(err);
     }
