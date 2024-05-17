@@ -1,11 +1,12 @@
 import { useState } from 'react';
 import { RootState } from '../../store';
 import { useSelector } from 'react-redux';
+import Navbar from '../../Components/Navbar/Navbar';
+import Footer from '../../Components/Footer/Footer';
 import InputField from '../../Components/InputField/InputField';
 import CustomButton from '../../Components/CustomButton/CustomButton';
 import OrderSummary from '../../Components/OrderSummary/OrderSummary';
 import ExpiryDateFields from '../../Components/ExpiryDateFields/ExpiryDateFields';
-import Navbar from '../../Components/Navbar/Navbar';
 import valid from 'card-validator';
 
 const Checkout = () => {
@@ -57,6 +58,7 @@ const Checkout = () => {
           <OrderSummary items={cart.items} total={cart.total} />
         </div>
       </div>
+      <Footer />
     </>
   );
 };

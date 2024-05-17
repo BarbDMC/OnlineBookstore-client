@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import Card from '../../Components/Card/Card';
 import Navbar from '../../Components/Navbar/Navbar';
+import Footer from '../../Components/Footer/Footer';
 import { RootState, AppDispatch } from '../../store';
 import { Book } from '../../interfaces/bookInterface';
 import { addBook } from '../../services/booksServices';
@@ -58,6 +59,7 @@ const Store = () => {
         {!books.length && status === 'succeeded' && <div className='text-black'>No books found</div>}
       </div>
       <BookModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} onSave={handleSave} />
+      <Footer />
     </div>
   );
 };
